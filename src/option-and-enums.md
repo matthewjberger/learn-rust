@@ -1,7 +1,7 @@
 # Option and Enums
 
-In this section, we are going to make the dog we created in the last section
-have some gourmet options for toys.
+In this section, we are going to make the dog
+we created in the last section have some gourmet options for toys.
 
 ## Enumerating Bones
 
@@ -68,3 +68,13 @@ fn main() {
     // ...
 }
 ```
+Now our dog can hold onto a `Bone`!
+
+However, things get more complicated when we want
+to start giving and taking bones.
+
+What if the dog already has a bone?
+What if the dog doesn't like the flavor?
+
+In the next section, we'll cover how to handle 
+_fallibility_ in our program.
