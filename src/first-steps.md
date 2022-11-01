@@ -4,7 +4,7 @@ To get started, open a terminal and run the following command.
 
 ```bash
 cargo new rust-crash-course
-cd rust-crust-crash-course
+cd rust-crash-course
 ```
 
 This uses a package manager for rust named `cargo` to generate a minimal rust project for us.
