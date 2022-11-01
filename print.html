@@ -324,8 +324,8 @@ the bytes are deallocated from the heap.</p>
 and <code>&amp;str</code> whenever we need a read-only reference to either a <code>str</code> or <code>String</code>.</p>
 <p>Rust is smart enough to handle either case using <a href="https://doc.rust-lang.org/book/ch15-02-deref.html">deref coercion</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="option-and-enums"><a class="header" href="#option-and-enums">Option and Enums</a></h1>
-<p>In this section, we are going to make the dog we created in the last section
-have some gourmet options for toys.</p>
+<p>In this section, we are going to make the dog
+we created in the last section have some gourmet options for toys.</p>
 <h2 id="enumerating-bones"><a class="header" href="#enumerating-bones">Enumerating Bones</a></h2>
 <p>Let's add an enumeration to our program
 that represents various bone flavors.</p>
@@ -382,6 +382,13 @@ fn main() {
     // ...
 }
 </code></pre></pre>
+<p>Now our dog can hold onto a <code>Bone</code>!</p>
+<p>However, things get more complicated when we want
+to start giving and taking bones.</p>
+<p>What if the dog already has a bone?
+What if the dog doesn't like the flavor?</p>
+<p>In the next section, we'll cover how to handle 
+<em>fallibility</em> in our program.</p>
 
                     </main>
 
