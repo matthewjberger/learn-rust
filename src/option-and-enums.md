@@ -68,7 +68,3 @@ fn main() {
     // ...
 }
 ```
-
-## Deriving Debug
-
-To easily be able to inspect values, we can
