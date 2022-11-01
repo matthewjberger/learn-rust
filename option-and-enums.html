@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data-structures.html"><strong aria-hidden="true">2.1.</strong> Data Structures</a></li><li class="chapter-item expanded "><a href="option-and-enums.html" class="active"><strong aria-hidden="true">2.2.</strong> Option and Enums</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data-structures.html"><strong aria-hidden="true">2.1.</strong> Data Structures</a></li><li class="chapter-item expanded "><a href="option-and-enums.html" class="active"><strong aria-hidden="true">2.2.</strong> Option and Enums</a></li><li class="chapter-item expanded "><a href="results-and-errors.html"><strong aria-hidden="true">2.3.</strong> Results and Errors</a></li></ol></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">3.</strong> Further Reading</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -200,6 +200,45 @@ to start giving and taking bones.</p>
 What if the dog doesn't like the flavor?</p>
 <p>In the next section, we'll cover how to handle 
 <em>fallibility</em> in our program.</p>
+<h2 id="full-program"><a class="header" href="#full-program">Full Program</a></h2>
+<p>The full program now looks like this.</p>
+<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
+    age: u8,
+    pub bone: Option&lt;Bone&gt;,
+}
+
+impl Dog {
+    pub fn new(age: u8) -&gt; Self {
+        Self { age, bone: None }
+    }
+
+    pub fn celebrate_birthday(&amp;mut self) {
+        self.age = self.age + 1;
+        println!(&quot;Wiggly butt is {} wags old!&quot;, self.age);
+    }
+}
+
+struct Bone {
+    kind: BoneKind,
+}
+
+impl Bone {
+    pub fn new(kind: BoneKind) -&gt; Self {
+        Self { kind }
+    }
+}
+
+enum BoneKind {
+    BaconFlavored,
+    TurkeyAndStuffing,
+    PeanutButter,
+}
+
+fn main() {
+    let mut dog = Dog::new(8);
+    dog.celebrate_birthday();
+}
+</code></pre></pre>
 
                     </main>
 
@@ -207,6 +246,9 @@ What if the dog doesn't like the flavor?</p>
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="data-structures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="results-and-errors.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -216,6 +258,9 @@ What if the dog doesn't like the flavor?</p>
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="data-structures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="results-and-errors.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 

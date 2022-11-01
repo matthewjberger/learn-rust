@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>A Crash Course in Rust</title>
-        <meta name="robots" content="noindex" />
+        <title>Results and Errors - A Crash Course in Rust</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -76,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data-structures.html"><strong aria-hidden="true">2.1.</strong> Data Structures</a></li><li class="chapter-item expanded "><a href="option-and-enums.html"><strong aria-hidden="true">2.2.</strong> Option and Enums</a></li><li class="chapter-item expanded "><a href="results-and-errors.html"><strong aria-hidden="true">2.3.</strong> Results and Errors</a></li></ol></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">3.</strong> Further Reading</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data-structures.html"><strong aria-hidden="true">2.1.</strong> Data Structures</a></li><li class="chapter-item expanded "><a href="option-and-enums.html"><strong aria-hidden="true">2.2.</strong> Option and Enums</a></li><li class="chapter-item expanded "><a href="results-and-errors.html" class="active"><strong aria-hidden="true">2.3.</strong> Results and Errors</a></li></ol></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">3.</strong> Further Reading</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -135,300 +134,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>Welcome!</p>
-<p>This book will quickly go over multiple programming language
-concepts specific to Rust. We'll start with a simple
-<code>Dog</code> data structure and gradually turn it into a full rust program
-using <a href="https://code.visualstudio.com/">Visual Studio Code</a> and a Rust language server named <a href="https://rust-analyzer.github.io/">rust-analyzer</a>.</p>
-<h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
-<p>The source code for this book can be <a href="https://github.com/matthewjberger/rust-crash-course/">found here</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
-<h2 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h2>
-<p>This project requires the <a href="https://www.rust-lang.org/">Rust programming language</a>.</p>
-<h2 id="development-environment-setup"><a class="header" href="#development-environment-setup">Development Environment Setup</a></h2>
-<p>Using <a href="https://code.visualstudio.com/">vscode</a> and <a href="https://github.com/rust-analyzer/rust-analyzer">rust-analyzer</a> with the rust-analyzer <a href="https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer">vscode extension</a> is recommended. However, any Rust development environment you are comfortable with will work.</p>
-<p>The <a href="https://doc.rust-lang.org/book/">official Rust book</a> is a great resource if you are new to Rust.</p>
-<h3 id="quick-windows-setup"><a class="header" href="#quick-windows-setup">Quick Windows Setup</a></h3>
-<p>On windows, installing programs can be trickier than on other platforms. It is recommended to use a package manager such as <a href="https://scoop.sh/">Scoop</a> or <a href="https://chocolatey.org/">chocolatey</a>.</p>
-<p>First, make sure <a href="https://aka.ms/wmf5download">PowerShell 5</a> (or later, include <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-6">PowerShell Core</a>) and .<a href="https://www.microsoft.com/net/download">NET Framework 4.5</a> (or later) are installed. Then run:</p>
-<pre><code class="language-powershell"># Install scoop
-Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-
-# Scoop uses git to update itself and 7zip to extract archives
-scoop install git 7zip 
-
-# Install the project's dependencies
-scoop install rustup
-
-# Set the stable rust toolchain as the default toolchain
-rustup default stable
-
-# Install vscode, kept in a separate bucket called 'extras'
-scoop bucket add extras
-scoop install vscode
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="first-steps"><a class="header" href="#first-steps">First Steps</a></h1>
-<p>To get started, open a terminal and run the following command.</p>
-<pre><code class="language-bash">cargo new rust-crash-course
-cd rust-crust-crash-course
-</code></pre>
-<p>This uses a package manager for rust named <code>cargo</code> to generate a minimal rust project for us.</p>
-<p>Now, we can run the project with cargo.</p>
-<pre><code class="language-bash">cargo run
-</code></pre>
-<p>You should see the phrase <code>Hello, World!</code> printed in the terminal.</p>
-<p><img src="images/hello.png" alt="Hello" /></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="data-structures"><a class="header" href="#data-structures">Data Structures</a></h1>
-<p>In this section, we'll create a cute <code>Dog</code>!</p>
-<p>Everyone loves pets, so let's start adding a pet to our project.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">// main.rs
-struct Dog;
-
-fn main() {
-    let _dog = Dog {};
-
-    println!(&quot;Hello, world!&quot;);
-}
-</code></pre></pre>
-<p>This doesn't do much though, so let's change that! </p>
-<h2 id="mutability-functions-and-birthdays"><a class="header" href="#mutability-functions-and-birthdays">Mutability, Functions, and Birthdays</a></h2>
-<p>Let's give our dog an <code>age</code> and allow
-them to celebrate their birthday.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
-    age: u8,
-}
-
-impl Dog {
-    pub fn celebrate_birthday(&amp;mut self) {
-        self.age = self.age + 1;
-        println!(&quot;Wiggly butt is {} wags old!&quot;, self.age);
-    }
-}
-
-fn main() {
-    let mut dog = Dog { age: 8 };
-    dog.celebrate_birthday();
-}
-</code></pre></pre>
-<p>Note that we have to add the <code>mut</code> keyword to the dog to be able
-to mutate it. In this case, the mutation is incrementing its age
-when celebrating its birthday.</p>
-<p>In Rust, objects are immutable by default.</p>
-<h2 id="constructors"><a class="header" href="#constructors">Constructors</a></h2>
-<p>Constructors in Rust are just functions that return an instance of an object.
-They are not treated specially by the language itself like they are in C++.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
-    age: u8,
-}
-
-impl Dog {
-    pub fn new(age: u8) -&gt; Self {
-        Self { age }
-    }
-
-    pub fn celebrate_birthday(&amp;mut self) {
-        self.age = self.age + 1;
-        println!(&quot;Wiggly butt is {} wags old!&quot;, self.age);
-    }
-}
-
-fn main() {
-    let mut dog = Dog::new(8);
-    dog.celebrate_birthday();
-}
-</code></pre></pre>
-<h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<p>Now we can make the dog speak by adding
-a public member method to the <code>Dog</code>'s <code>impl</code> block.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
-    age: u8,
-}
-
-impl Dog {
-    pub fn new(age: u8) -&gt; Self {
-        Self { age }
-    }
-
-    pub fn celebrate_birthday(&amp;mut self) {
-        self.age = self.age + 1;
-        println!(&quot;Wiggly butt is {} wags old!&quot;, self.age);
-    }
-
-    pub fn speak(&amp;self) {
-        println!(&quot;Woof!&quot;);
-    }
-}
-
-fn main() {
-    let mut dog = Dog::new(8);
-    dog.celebrate_birthday();
-    dog.speak();
-}
-</code></pre></pre>
-<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
-    age: u8,
-}
-
-impl Dog {
-    pub fn new(age: u8) -&gt; Self {
-        Self { age }
-    }
-
-    pub fn celebrate_birthday(&amp;mut self) {
-        self.age = self.age + 1;
-        println!(&quot;Wiggly butt is {} wags old!&quot;, self.age);
-    }
-}
-
-fn main() {
-    let mut dog = Dog::new(8);
-    dog.celebrate_birthday();
-}
-</code></pre></pre>
-<h2 id="extra-details"><a class="header" href="#extra-details">Extra Details</a></h2>
-<h3 id="numeric-types"><a class="header" href="#numeric-types">Numeric Types</a></h3>
-<p>Note that <code>u8</code> represents an <code>8-bit, unsigned integer</code>. There are other types like this
-to represent various numeric values in efficient ways. This is a big distinction
-from languages like typescript, which only have a type <code>number</code>.</p>
-<h3 id="printing-to-the-console"><a class="header" href="#printing-to-the-console">Printing to the Console</a></h3>
-<p>To print to the console, the following code is used.</p>
-<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>println!(&quot;My message is: {}&quot;, &quot;Hello!&quot;);
-<span class="boring">}
-</span></code></pre></pre>
-<blockquote>
-<p>Note the <code>!</code> after the <code>println</code>. This indicates that it is a <a href="https://doc.rust-lang.org/book/ch19-06-macros.html">macro</a>, which is
-an advanced topic in Rust that is out of scope for this book.</p>
-</blockquote>
-<h3 id="strings-in-rust"><a class="header" href="#strings-in-rust">Strings in Rust</a></h3>
-<p>If you're wondering why we call <code>.to_string()</code> on string literals,
-here is why!</p>
-<p>So what is the difference between <code>&amp;str</code> and <code>String</code>?</p>
-<p>String literals are baked into the final executable
-in a specific region of memory that is neither the stack
-nor the heap. They exist for the lifetime of the program
-and are immutable,</p>
-<p><code>str</code> is an immutable sequence of UTF-8 bytes of dynamic length.
-String literals have the type <code>&amp;str</code>, which is an <code>immutable reference</code> (<code>&amp;</code>)
-to a <code>str</code>.</p>
-<p>A <code>String</code> is a data structure that has a pointer to
-a sequence of bytes on the heap as well as a field indicating the total size
-of those bytes. This can be <code>owned</code> by a particular data structure,
-who will manage its lifetime. When the <code>String</code> is destroyed,
-the bytes are deallocated from the heap.</p>
-<p>To convert from a <code>&amp;str</code> to a <code>String</code>, we call <code>.to_string()</code>.</p>
-<p>Most of the time we will use <code>String</code> in data structures,
-and <code>&amp;str</code> whenever we need a read-only reference to either a <code>str</code> or <code>String</code>.</p>
-<p>Rust is smart enough to handle either case using <a href="https://doc.rust-lang.org/book/ch15-02-deref.html">deref coercion</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="option-and-enums"><a class="header" href="#option-and-enums">Option and Enums</a></h1>
-<p>In this section, we are going to make the dog
-we created in the last section have some gourmet options for toys.</p>
-<h2 id="enumerating-bones"><a class="header" href="#enumerating-bones">Enumerating Bones</a></h2>
-<p>Let's add an enumeration to our program
-that represents various bone flavors.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">// ...
-
-struct Bone {
-    kind: BoneKind,
-}
-
-impl Bone {
-    pub fn new(kind: BoneKind) -&gt; Self {
-        Self { kind }
-    }
-}
-
-enum BoneKind {
-    BaconFlavored,
-    TurkeyAndStuffing,
-    PeanutButter,
-}
-
-fn main() {
-    // ...
-}
-</code></pre></pre>
-<h2 id="optional-fields"><a class="header" href="#optional-fields">Optional Fields</a></h2>
-<p>Now we need a way to represent the dog having
-a bone or not having a bone. </p>
-<p>We can represent this using the <a href="https://doc.rust-lang.org/std/option/"><code>Option</code></a> type.</p>
-<p><code>Option</code> is a generic enumeration that looks like this.</p>
-<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub enum Option&lt;T&gt; {
-    None,
-    Some(T),
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p>With this information, let's add an optional <code>bone</code> field to our <code>Dog</code>.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
-    age: u8,
-    pub bone: Option&lt;Bone&gt;,
-}
-
-impl Dog {
-    pub fn new(age: u8) -&gt; Self {
-        Self { age, bone: None }
-    }
-
-    // ...
-}
-
-fn main() {
-    // ...
-}
-</code></pre></pre>
-<p>Now our dog can hold onto a <code>Bone</code>!</p>
-<p>However, things get more complicated when we want
-to start giving and taking bones.</p>
-<p>What if the dog already has a bone?
-What if the dog doesn't like the flavor?</p>
-<p>In the next section, we'll cover how to handle 
-<em>fallibility</em> in our program.</p>
-<h2 id="full-program"><a class="header" href="#full-program">Full Program</a></h2>
-<p>The full program now looks like this.</p>
-<pre><pre class="playground"><code class="language-rust edition2021">struct Dog {
-    age: u8,
-    pub bone: Option&lt;Bone&gt;,
-}
-
-impl Dog {
-    pub fn new(age: u8) -&gt; Self {
-        Self { age, bone: None }
-    }
-
-    pub fn celebrate_birthday(&amp;mut self) {
-        self.age = self.age + 1;
-        println!(&quot;Wiggly butt is {} wags old!&quot;, self.age);
-    }
-}
-
-struct Bone {
-    kind: BoneKind,
-}
-
-impl Bone {
-    pub fn new(kind: BoneKind) -&gt; Self {
-        Self { kind }
-    }
-}
-
-enum BoneKind {
-    BaconFlavored,
-    TurkeyAndStuffing,
-    PeanutButter,
-}
-
-fn main() {
-    let mut dog = Dog::new(8);
-    dog.celebrate_birthday();
-}
-</code></pre></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="results-and-errors"><a class="header" href="#results-and-errors">Results and Errors</a></h1>
+                        <h1 id="results-and-errors"><a class="header" href="#results-and-errors">Results and Errors</a></h1>
 <p>Now we want to be able to give 
 the dog a bone and take it away to throw for fetching.
 These operations can fail for various reasons.</p>
@@ -592,7 +298,7 @@ struct AnimalError {
 <span class="boring">}
 </span></code></pre></pre>
 <p>Then, add this to the rest of our structs and plain enums.</p>
-<h2 id="full-program-1"><a class="header" href="#full-program-1">Full Program</a></h2>
+<h2 id="full-program"><a class="header" href="#full-program">Full Program</a></h2>
 <p>The full program now looks like this.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">pub type Result&lt;T, E = Box&lt;dyn std::error::Error&gt;&gt; = std::result::Result&lt;T, E&gt;;
 
@@ -702,33 +408,29 @@ fn main() -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h1>
-<ul>
-<li>
-<p>The Rust bookshelf</p>
-<ul>
-<li>To access the rust bookshelf, run <code>rustup doc</code> from anywhere. A link will open in the browser and allow access to a large collection of standard, official documentation and rust learning resources.</li>
-</ul>
-</li>
-<li>
-<p><a href="https://github.com/ctjhoa/rust-learning">Awesome Rust Learning</a></p>
-<ul>
-<li>This has a large list of rust learning resources available
-and is generally kept up to date.</li>
-</ul>
-</li>
-</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="option-and-enums.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="further-reading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="option-and-enums.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="further-reading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -744,10 +446,5 @@ and is generally kept up to date.</li>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
     </body>
 </html>
